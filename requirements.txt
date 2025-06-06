@@ -1,2 +1,5 @@
 flask
 random
+render_template
+request
+jsonify
