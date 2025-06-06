@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #fffb00;
+    padding: 30px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+#word {
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+.letter {
+    display: inline-block;
+    width: 30px;
+    border-bottom: 2px solid #000;
+    margin: 0 5px;
+}
+
+.keyboard {
+    margin-top: 40px;
+}
+
+.key {
+    padding: 10px 14px;
+    margin: 3px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#result {
+    font-size: 20px;
+    margin-top: 20px;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hangman Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Hangman Game</h1>
+        <p><strong>Hint:</strong> {{ hint }}</p>
+        <div id="word">
+            {% for _ in range(word_length) %}
+                <span class="letter">_</span>
+            {% endfor %}
+        </div>
+        <div class="keyboard">
+            {% for letter in "abcdefghijklmnopqrstuvwxyz" %}
+                <button class="key" onclick="guessLetter('{{ letter }}')">{{ letter }}</button>
+            {% endfor %}
+        </div>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        const secretWord = "{{ word }}";
+        let guessedWord = Array(secretWord.length).fill("_");
+        let wrongGuesses = 0;
+        const maxWrong = 5;
+
+        function guessLetter(letter) {
+            if (guessedWord.includes(letter) || document.getElementById('result').textContent) return;
+
+            let found = false;
+            for (let i = 0; i < secretWord.length; i++) {
+                if (secretWord[i] === letter) {
+                    guessedWord[i] = letter;
+                    found = true;
+                }
+            }
+
+            updateDisplay();
+
+            if (!found) {
+                wrongGuesses++;
+            }
+
+            if (guessedWord.join('') === secretWord) {
+                document.getElementById('result').textContent = "🎉 You won!";
+            } else if (wrongGuesses >= maxWrong) {
+                document.getElementById('result').textContent = "💀 You lost! The word was: " + secretWord;
+            }
+        }
+
+        function updateDisplay() {
+            const wordDiv = document.getElementById('word');
+            wordDiv.innerHTML = guessedWord.map(l => `<span class="letter">${l}</span>`).join('');
+        }
+    </script>
+</body>
+</html>
